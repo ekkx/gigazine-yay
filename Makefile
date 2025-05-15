@@ -16,7 +16,6 @@ build:
 #? up: アプリケーションの起動
 up:
 	docker compose up -d
-	docker compose run --rm gigazine-yay bash -c "python /app/gigazine/main.py"
 .PHONY: up
 
 #? down: アプリケーションの停止

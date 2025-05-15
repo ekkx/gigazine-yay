@@ -7,4 +7,4 @@ services:
       - .:/app
     env_file:
       - .env
-    tty: true
+    command: python /app/gigazine/main.py
