@@ -22,7 +22,7 @@ class Gigazine(discord.Client):
     self.tester_id = tester_id
     self.yay_email = yay_email
     self.yay_password = yay_password
-    self.yay = yaylib.Client(loglevel=logging.DEBUG)
+    self.yay = yaylib.Client(loglevel=logging.INFO)
 
   async def on_ready(self):
     print(f"Logged in as {self.user} (ID: {self.user.id})")
@@ -43,6 +43,7 @@ class Gigazine(discord.Client):
 
     await self.yay.auth.login(self.yay_email, self.yay_password)
     await self.yay.post.create_post(text=article.title, shared_url=article.url)
+    print("Article successfully posted to Yay!")
 
 def main():
   intents = discord.Intents.default()
