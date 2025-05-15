@@ -25,7 +25,7 @@ class Gigazine(discord.Client):
     self.yay = yaylib.Client(loglevel=logging.INFO)
 
   async def on_ready(self):
-    print(f"Logged in as {self.user} (ID: {self.user.id})")
+    self.yay.logger.info("Gigazine bot is ready!")
 
   async def on_message(self, message: discord.Message):
     if message.author == self.user:
@@ -38,12 +38,12 @@ class Gigazine(discord.Client):
       return
 
     article = utils.extract_article(message)
-    print(article.title)
-    print(article.url)
+    self.yay.logger.info(f"Article Title: {article.title}")
+    self.yay.logger.info(f"Article URL: {article.url}")
 
     await self.yay.auth.login(self.yay_email, self.yay_password)
     await self.yay.post.create_post(text=article.title, shared_url=article.url)
-    print("Article successfully posted to Yay!")
+    self.yay.logger.info("Article successfully posted to Yay!")
 
 def main():
   intents = discord.Intents.default()
