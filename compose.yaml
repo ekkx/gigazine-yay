@@ -1,0 +1,10 @@
+services:
+  gigazine-yay:
+    container_name: gigazine-yay
+    build:
+      context: .
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    tty: true
