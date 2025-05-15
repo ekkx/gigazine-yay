@@ -3,14 +3,22 @@ import discord
 
 from models import GigazineArticle
 
-def get_article_title(text, url):
+def get_article_url(text: str):
+    url_regex = r"(?P<url>https?://[^\s]+)"
+    match = re.search(url_regex, text)
+    if match:
+        return match.group("url")
+    else:
+        return ""
+
+def get_article_title(text:str, url:str):
     if url is not None:
         return re.sub(url, '', text)
     return text
 
 def extract_article(message: discord.Message) -> GigazineArticle:
-  if message.embeds and message.embeds[0]:
-    url = message.embeds[0].url
-    title = get_article_title(message.content, url)
-    return GigazineArticle(title, url)
-  return GigazineArticle(message.content)
+  url = get_article_url(message.content)
+  return GigazineArticle(
+    title=get_article_title(message.content, url),
+    url=url
+  )
