@@ -23,6 +23,10 @@
 		"ghcr.io/devcontainers/features/git:1": {}
 	},
 
+  "mounts": [
+    "source=${env:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+  ],
+
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
